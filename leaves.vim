@@ -18,6 +18,12 @@ endif
 if g:leaf_size=="letter" && !exists("g:leaf_maxrows")
   let g:leaf_maxrows=64
 endif
+if g:leaf_size=="3x5" && !exists("g:leaf_maxcols")
+  let g:leaf_maxcols=47
+endif
+if g:leaf_size=="3x5" && !exists("g:leaf_maxrows")
+  let g:leaf_maxrows=17
+endif
 
 function LeafFoldLevel(lnum)
     let thisline = getline(a:lnum)
