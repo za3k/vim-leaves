@@ -80,6 +80,7 @@ endfunction
 
 function LeafSetUpIndexUi()
     call LeafSetUp3x5()
+    let &colorcolumn = g:leaf_maxcols+1
     call LeafSetUpUi()
 endfunction
 
