@@ -4,6 +4,18 @@ endif
 let g:loaded_research = '0.1'
 
 autocmd BufEnter *.leaves call LeafSetUpUi()
+autocmd BufEnter *.index.leaves call LeafSetUpIndexUi()
+
+function LeafSetUpLetter()
+  "Would be 78 without hole punch
+  let g:leaf_maxcols=74
+  let g:leaf_maxrows=64
+endfunction
+
+function LeafSetUp3x5()
+  let g:leaf_maxcols=47
+  let g:leaf_maxrows=17
+endfunction
 
 if !exists("g:leaves_separator")
   let g:leaf_separator="==="
@@ -11,18 +23,13 @@ endif
 if !exists("g:leaf_size")
   let g:leaf_size="letter"
 endif
-if g:leaf_size=="letter" && !exists("g:leaf_maxcols")
-  "Would be 78 without hole punch
-  let g:leaf_maxcols=74
-endif
-if g:leaf_size=="letter" && !exists("g:leaf_maxrows")
-  let g:leaf_maxrows=64
-endif
-if g:leaf_size=="3x5" && !exists("g:leaf_maxcols")
-  let g:leaf_maxcols=47
-endif
-if g:leaf_size=="3x5" && !exists("g:leaf_maxrows")
-  let g:leaf_maxrows=17
+if !exists("g:leaf_maxrows") || !exists("g:leaf_maxcols")
+  if g:leaf_size=="letter"
+    call LeafSetUpLetter()
+  endif
+  if g:leaf_size=="3x5"
+    call LeafSetUp3x5()
+  endif
 endif
 
 function LeafFoldLevel(lnum)
@@ -70,3 +77,9 @@ function LeafSetUpUi()
     set foldcolumn=1
     syn sync fromstart
 endfunction
+
+function LeafSetUpIndexUi()
+    call LeafSetUp3x5()
+    call LeafSetUpUi()
+endfunction
+
