@@ -2,7 +2,7 @@ To use this plugin, put it in your ~/.vim/plugin directory. It has no external d
 
 It's used to edit '.leaves' files. Internally, they have a number of pages, separated
 ===
-like this. Each page is limited to a fixed-size width and height.
+like this. Each page is limited to a fixed-size width and height. Anything outside this area will be highlighted.
 
 Settings you can change in your .vimrc:
     g:leaf_separator (default: '==='): Change the leaf separator
