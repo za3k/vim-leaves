@@ -70,12 +70,24 @@ function LeafRemoveHighlight()
     matchdelete(w:m2)
 endfunction
 
+function LeafYank()
+    let l:winview = winsaveview()
+    normal ]zmz
+    normal [z
+    if getline('.') == "==="
+        normal j
+    endif
+    normal y'z
+    call winrestview(l:winview)
+endfunction
+
 function LeafSetUpUi()
     call LeafSetUpFolds()
     call LeafSetUpHighlight()
     set foldlevel=1
     set foldcolumn=1
     syn sync fromstart
+    command! LeafYank :call LeafYank()
 endfunction
 
 function LeafSetUpIndexUi()
@@ -83,4 +95,3 @@ function LeafSetUpIndexUi()
     let &colorcolumn = g:leaf_maxcols+1
     call LeafSetUpUi()
 endfunction
-
